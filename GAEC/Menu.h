@@ -7,11 +7,96 @@
 #include <vector>
 #include "Student.h"
 #include "StudentManager.h"
+#include "LoginSystem.h"
+#include "Admin.h"
+#include "Userobisnuit.h"
+void Login()
+{
+    LoginSystem sistem;
+    sistem.loadUsersFromFile("users.txt");
+    sistem.AdaugareUtilizator(new Admin("admin", "admin123"));
+   
 
+    int n,stop;
+    stop = 1;
+    while (stop > 0) 
+    {
+        system("cls");
+        cout << '\n';
+        cout << "===============================" << '\n';
+        cout << "=         GAEC PROGRAM        =" << '\n';
+        cout << "===============================" << '\n';
+        cout << '\n';
+        cout << "1. Inregistrare." << '\n';
+        cout << '\n';
+        cout << "2. Login." << '\n';
+        cout << '\n';
+        cout << "3. Inchiderea programului." << '\n';
+        cout << '\n';
+        cout << "Alegeti un numar pentru a continua. (1-3)" << '\n';
+        cout << '\n';
+        cin >> n;
+
+        if (n == 1) {
+            system("cls");
+            string username, password;
+            cout << '\n';
+            cout << "===============================" << '\n';
+            cout << "=         GAEC PROGRAM        =" << '\n';
+            cout << "===============================" << '\n';
+            cout << '\n';
+            cout << "Utilizator: ";
+            cin >> username;
+            cout << "Parola: ";
+            cin >> password;
+            sistem.inregistrare(username, password);
+            cout << "Utilizatorul a fost inregistrat cu succes!" << '\n';
+        }
+        else if (n == 2) {
+            string username, password;
+            system("cls");
+            cout << '\n';
+            cout << "===============================" << '\n';
+            cout << "=         GAEC PROGRAM        =" << '\n';
+            cout << "===============================" << '\n';
+            cout << '\n';
+            cout << "Utilizator: ";
+            cin >> username;
+            cout << "Parola: ";
+            cin >> password;
+
+            User* loggedInUser = sistem.autentificare(username, password);
+            if (loggedInUser) {
+                loggedInUser->displayRole();
+            }
+            else {
+                system("cls");
+                cout << '\n';
+                cout << "===============================" << '\n';
+                cout << "=         GAEC PROGRAM        =" << '\n';
+                cout << "===============================" << '\n';
+                cout << '\n';
+                cout << "Nume de utilizator sau parola sunt gresite!" << '\n';
+            }
+        }
+        else if (n == 3) {
+            break;
+        }
+        else {
+            system("cls");
+            cout << '\n';
+            cout << "===============================" << '\n';
+            cout << "=         GAEC PROGRAM        =" << '\n';
+            cout << "===============================" << '\n';
+            cout << '\n';
+            cout << "Numar invalid,incearca din nou!" << '\n';
+        }
+    }
+}
 void FirstMenu()
 {
     int stop = 1;
-    int n;
+    int n,stopthis,stopthiss;
 
     while (stop > 0)
     {
@@ -25,7 +110,7 @@ void FirstMenu()
         cout << '\n';
         cout << "2. Meniul de administratie." << '\n';
         cout << '\n';
-        cout << "3. Gestionarea evenimentelor." << '\n';
+        cout << "3. Gestionarea activitatilor." << '\n';
         cout << '\n';
         cout << "4. Inchiderea programului." << '\n';
         cout << '\n';
@@ -33,8 +118,6 @@ void FirstMenu()
         cout << '\n';
         cin >> n;
         cout << '\n';
-
-        int stopthis;
         switch (n)
         {
         case 1: {
@@ -106,40 +189,66 @@ void FirstMenu()
                 cout << "=         GAEC PROGRAM        =" << '\n';
                 cout << "===============================" << '\n';
                 cout << '\n';
-                cout << "1. Creearea unui eveniment. " << '\n';
+                cout << "1. Gestionarea cluburilor." << '\n';
                 cout << '\n';
-                cout << "2. Asignarea unui student pentru participare la eveniment." << '\n';
+                cout << "2. Gestionarea evenimentelor." << '\n';
                 cout << '\n';
-                cout << "3. Schimbarea datelor unui eveniment." << '\n';
+                cout << "3. Inapoi la meniul principal." << '\n';
                 cout << '\n';
-                cout << "4. Stergerea unui student din eveniment." << '\n';
-                cout << '\n';
-                cout << "5. Afisarea datelor unui eveniment" << '\n';
-                cout << '\n';
-                cout << "6. Inapoi la meniul principal." << '\n';
-                cout << '\n';
-                cout << "Alegeti un numar pentru a continua. (1-6)" << '\n';
+                cout << "Alegeti un numar pentru a continua. (1-3)" << '\n';
                 cout << '\n';
                 cin >> n;
                 cout << '\n';
                 switch (n)
                 {
                 case 1:
-                    // Add functionality for event creation here
+                    stopthiss = 1;
+                    while (stopthiss > 0)
+                    {
+                        system("cls");
+                        cout << '\n';
+                        cout << "===============================" << '\n';
+                        cout << "=         GAEC PROGRAM        =" << '\n';
+                        cout << "===============================" << '\n';
+                        cout << '\n';
+                        cout << "1. Creearea unui club." << '\n';
+                        cout << '\n';
+                        cout << "2. Afisarea tuturor cluburilor." << '\n';
+                        cout << '\n';
+                        cout << "3. Schimbarea datelor unui club." << '\n';
+                        cout << '\n';
+                        cout << "4. Stergerea unui club" << '\n';
+                        cout << '\n';
+                        cout << "5. Inapoi la meniul anterior." << '\n';
+                        cout << '\n';
+                        cout << "Alegeti un numar pentru a continua. (1-4)" << '\n';
+                        cout << '\n';
+                        cin >> n;
+                        switch (n)
+                        {
+                        case 1:
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+                            break;
+                        case 4:
+                            break;
+                        case 5:
+                            stopthiss = 0;
+                            break;
+                        default:
+                            cout << "Optiune invalida.\n";
+                            cin.ignore();
+                            cin.get();
+                            break;
+                        }
+                    }
                     break;
                 case 2:
-                    // Add functionality for assigning a student to an event
+                    // Add functionality for assigning a student to an club
                     break;
                 case 3:
-                    // Add functionality for modifying event data
-                    break;
-                case 4:
-                    // Add functionality for removing a student from an event
-                    break;
-                case 5:
-                    // Add functionality for displaying event data
-                    break;
-                case 6:
                     stopthis = 0;
                     break;
                 default:

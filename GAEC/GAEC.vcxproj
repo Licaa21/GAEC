@@ -127,19 +127,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Admin.cpp" />
     <ClCompile Include="Club.cpp" />
     <ClCompile Include="GAEC.cpp" />
+    <ClCompile Include="LoginSystem.cpp" />
     <ClCompile Include="Student.cpp" />
     <ClCompile Include="StudentManager.cpp" />
+    <ClCompile Include="User.cpp" />
+    <ClCompile Include="Userobisnuit.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Admin.h" />
     <ClInclude Include="Club.h" />
+    <ClInclude Include="LoginSystem.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Student.h" />
     <ClInclude Include="StudentManager.h" />
+    <ClInclude Include="User.h" />
+    <ClInclude Include="Userobisnuit.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Studenti.txt" />
+    <Text Include="users.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
