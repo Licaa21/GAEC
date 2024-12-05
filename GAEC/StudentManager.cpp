@@ -153,7 +153,7 @@ void StudentManager::Changedata()
 	}
 	file.close();
 
-	if (lines.empty())
+	if (isEmpty() == true)
 	{
 		cout << '\n';
 		cout << "===============================" << '\n';
