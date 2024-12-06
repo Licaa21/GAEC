@@ -43,9 +43,25 @@ void LoginSystem::inregistrare(const string& username, const string& password)
 
 User* LoginSystem::autentificare(const string& enteredUsername, const string& enteredPassword)
 {
-	if (users.find(enteredUsername) != users.end() && users[enteredUsername]->login(enteredUsername, enteredPassword))
+	if (users.find(enteredUsername) == users.end())
 	{
-		return users[enteredUsername];
+		cout << "Numele de utilizator nu a fost gasit." << '\n';
+		return nullptr;
+	}
+	User* user = users[enteredUsername];
+	if (!user->login(enteredUsername, enteredPassword))
+	{
+		cout <<"Parola este gresita pentru utilizatorul: " << enteredUsername << '\n';
+		return nullptr;
+	}
+
+	if (dynamic_cast<Admin*>(user))
+	{
+		return user;
+	}
+	else if (dynamic_cast<Userobisnuit*>(user))
+	{
+		return user;
 	}
 	return nullptr;
 }

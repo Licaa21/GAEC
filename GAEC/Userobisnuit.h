@@ -6,8 +6,8 @@
 class Userobisnuit : public User
 {
 public:
-	Userobisnuit(string u, string p);
-	void displayRole() override;
+    Userobisnuit(string u, string p);
+    void displayRole() override;
 };
 
 #endif

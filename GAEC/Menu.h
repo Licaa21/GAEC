@@ -10,16 +10,14 @@
 #include "LoginSystem.h"
 #include "Admin.h"
 #include "Userobisnuit.h"
-void Login()
+User* Login(bool &succes)
 {
+    succes = false;
     LoginSystem sistem;
     sistem.loadUsersFromFile("users.txt");
     sistem.AdaugareUtilizator(new Admin("admin", "admin123"));
-   
-
-    int n,stop;
-    stop = 1;
-    while (stop > 0) 
+    int n, stop=1;
+    while (stop > 0)
     {
         system("cls");
         cout << '\n';
@@ -36,64 +34,86 @@ void Login()
         cout << "Alegeti un numar pentru a continua. (1-3)" << '\n';
         cout << '\n';
         cin >> n;
-
-        if (n == 1) {
-            system("cls");
-            string username, password;
-            cout << '\n';
-            cout << "===============================" << '\n';
-            cout << "=         GAEC PROGRAM        =" << '\n';
-            cout << "===============================" << '\n';
-            cout << '\n';
-            cout << "Utilizator: ";
-            cin >> username;
-            cout << "Parola: ";
-            cin >> password;
-            sistem.inregistrare(username, password);
-            cout << "Utilizatorul a fost inregistrat cu succes!" << '\n';
-        }
-        else if (n == 2) {
-            string username, password;
-            system("cls");
-            cout << '\n';
-            cout << "===============================" << '\n';
-            cout << "=         GAEC PROGRAM        =" << '\n';
-            cout << "===============================" << '\n';
-            cout << '\n';
-            cout << "Utilizator: ";
-            cin >> username;
-            cout << "Parola: ";
-            cin >> password;
-
-            User* loggedInUser = sistem.autentificare(username, password);
-            if (loggedInUser) {
-                loggedInUser->displayRole();
+        switch (n)
+        {
+            case 1:
+                system("cls");
+                {
+                    string username, password;
+                    cout << '\n';
+                    cout << "===============================" << '\n';
+                    cout << "=         GAEC PROGRAM        =" << '\n';
+                    cout << "===============================" << '\n';
+                    cout << '\n';
+                    cout << "Utilizator: ";
+                    cin >> username;
+                    cout << "Parola: ";
+                    cin >> password;
+                    sistem.inregistrare(username, password);
+                    cout << "Utilizatorul a fost inregistrat cu succes!" << '\n';
+                }
+                break;
+            case 2:
+            {   
+                system("cls");
+                {
+                    string username, password;
+                    cout << '\n';
+                    cout << "===============================" << '\n';
+                    cout << "=         GAEC PROGRAM        =" << '\n';
+                    cout << "===============================" << '\n';
+                    cout << '\n';
+                    cout << "Utilizator: ";
+                    cin >> username;
+                    cout << "Parola: ";
+                    cin >> password;
+                    User* loggedInUser = sistem.autentificare(username, password);
+                    if (loggedInUser)
+                    {
+                        loggedInUser->displayRole();
+                        succes = true;
+                        return loggedInUser;
+                    }
+                    else
+                    {
+                        system("cls");
+                        cout << '\n';
+                        cout << "===============================" << '\n';
+                        cout << "=         GAEC PROGRAM        =" << '\n';
+                        cout << "===============================" << '\n';
+                        cout << '\n';
+                        cout << "Numele de utilizator sau parola sunt gresite, apasati tasta ENTER si incercati din nou!" << '\n';
+                        cout << '\n';
+                        cin.ignore();
+                        cin.get();
+                    }
+                }
             }
-            else {
+                break;
+            case 3:
+                system("cls");
+                exit(0);
+            default:
                 system("cls");
                 cout << '\n';
                 cout << "===============================" << '\n';
                 cout << "=         GAEC PROGRAM        =" << '\n';
                 cout << "===============================" << '\n';
                 cout << '\n';
-                cout << "Nume de utilizator sau parola sunt gresite!" << '\n';
-            }
-        }
-        else if (n == 3) {
-            break;
-        }
-        else {
-            system("cls");
-            cout << '\n';
-            cout << "===============================" << '\n';
-            cout << "=         GAEC PROGRAM        =" << '\n';
-            cout << "===============================" << '\n';
-            cout << '\n';
-            cout << "Numar invalid,incearca din nou!" << '\n';
+                cout << "Numar invalid, apasati tasta ENTER si incercati din nou!" << '\n';
+                cout << '\n';
+                cin.ignore();
+                cin.get();
+                break;
         }
     }
 }
-void FirstMenu()
+
+void FirstUserMenu(bool &backToLogin)
+{
+    cout << "PULA" << endl;
+}
+void FirstMenu(bool& backToLogin)
 {
     int stop = 1;
     int n,stopthis,stopthiss;
@@ -108,11 +128,13 @@ void FirstMenu()
         cout << '\n';
         cout << "1. Gestionarea studentilor." << '\n';
         cout << '\n';
-        cout << "2. Meniul de administratie." << '\n';
+        cout << "2. Gestionarea activitatilor." << '\n';
         cout << '\n';
-        cout << "3. Gestionarea activitatilor." << '\n';
+        cout << "3. Meniul de administratie." << '\n';
         cout << '\n';
-        cout << "4. Inchiderea programului." << '\n';
+        cout << "4. Inapoi la meniul de logare." << '\n';
+        cout << '\n';
+        cout << "5. Inchiderea programului." << '\n';
         cout << '\n';
         cout << "Alegeti un numar pentru a continua. (1-4)" << '\n';
         cout << '\n';
@@ -260,10 +282,17 @@ void FirstMenu()
             }
             break;
         }
+        case 3:
+            system("cls");
+            break;
         case 4:
             system("cls");
+            backToLogin = true;
             stop = 0;
             break;
+        case 5:
+            system("cls");
+            exit(0);
         default:
             cout << "Optiune invalida. Incercati din nou.\n";
             cin.ignore();
