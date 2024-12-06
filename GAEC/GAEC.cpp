@@ -6,11 +6,14 @@ int main()
 {
     bool succes = false;
     bool backToLogin = false;
+    LoginSystem sistem;
     User* loggedInUser = nullptr;
 
+    sistem.loadUsersFromFile("users.txt");
+    sistem.AdaugareUtilizator(new Admin("ADMIN", "admin123"));
     while (!succes)
     {
-        loggedInUser = Login(succes);
+        loggedInUser = Login(sistem,succes);
 
         if (loggedInUser)
         {
@@ -23,7 +26,8 @@ int main()
             {
                 FirstUserMenu(backToLogin);
             }
-
+            else
+                succes = false;
             if (backToLogin)
             {
                 succes = false;

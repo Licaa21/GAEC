@@ -12,6 +12,7 @@ protected:
 
 public:
 	User(string u, string p);
+	virtual ~User() {}
 	virtual bool login(const string& enteredUsername, const string& enteredPassword);
 	virtual void displayRole() = 0;
 

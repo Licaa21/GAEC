@@ -10,12 +10,9 @@
 #include "LoginSystem.h"
 #include "Admin.h"
 #include "Userobisnuit.h"
-User* Login(bool &succes)
+User* Login(LoginSystem sistem,bool& succes)
 {
     succes = false;
-    LoginSystem sistem;
-    sistem.loadUsersFromFile("users.txt");
-    sistem.AdaugareUtilizator(new Admin("admin", "admin123"));
     int n, stop=1;
     while (stop > 0)
     {
@@ -88,8 +85,9 @@ User* Login(bool &succes)
                         cin.get();
                     }
                 }
-            }
                 break;
+            }
+                
             case 3:
                 system("cls");
                 exit(0);
@@ -106,10 +104,12 @@ User* Login(bool &succes)
                 cin.get();
                 break;
         }
+
     }
+    return nullptr;
 }
 
-void FirstUserMenu(bool &backToLogin)
+void FirstUserMenu(bool& backToLogin)
 {
     cout << "PULA" << endl;
 }

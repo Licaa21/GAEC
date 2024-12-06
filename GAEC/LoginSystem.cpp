@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <map>
 using namespace std;
 LoginSystem::~LoginSystem()
 {
@@ -16,6 +17,12 @@ LoginSystem::~LoginSystem()
 
 void LoginSystem::AdaugareUtilizator(User* user)
 {
+	if (users.find(user->getUsername()) != users.end())
+	{
+		cerr << "Eroare" << '\n';
+		delete user;
+		return;
+	}
 	users[user->getUsername()] = user;
 }
 
@@ -33,7 +40,7 @@ void LoginSystem::inregistrare(const string& username, const string& password)
 	ofstream userFile("users.txt", ios::app);
 	if (userFile)
 	{
-		userFile << newUser->getUsername() << " " << newUser->getPassword() << '\n';
+		userFile << username << " " << password << '\n';
 	}
 	else
 	{
@@ -49,21 +56,18 @@ User* LoginSystem::autentificare(const string& enteredUsername, const string& en
 		return nullptr;
 	}
 	User* user = users[enteredUsername];
+	if (!user)
+	{
+		cerr << "Eroare" << '\n';
+		return nullptr;
+	}
 	if (!user->login(enteredUsername, enteredPassword))
 	{
 		cout <<"Parola este gresita pentru utilizatorul: " << enteredUsername << '\n';
 		return nullptr;
 	}
 
-	if (dynamic_cast<Admin*>(user))
-	{
-		return user;
-	}
-	else if (dynamic_cast<Userobisnuit*>(user))
-	{
-		return user;
-	}
-	return nullptr;
+	return user;
 }
 
 void LoginSystem::loadUsersFromFile(const string& filename)
@@ -83,8 +87,11 @@ void LoginSystem::loadUsersFromFile(const string& filename)
 		string username, password;
 		ss >> username >> password;
 
-
-		if (username == "admin")
+		if (username.empty() || password.empty())
+		{
+			cerr << "Eroare." <<'\n';
+		}
+		if (username == "ADMIN")
 		{
 			AdaugareUtilizator(new Admin(username, password));
 		}
