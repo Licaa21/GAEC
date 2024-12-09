@@ -11,6 +11,7 @@ protected:
 	string password;
 
 public:
+	virtual bool isAdmin() = 0;
 	User(string u, string p);
 	virtual ~User() {}
 	virtual bool login(const string& enteredUsername, const string& enteredPassword);

@@ -8,6 +8,7 @@ class Userobisnuit : public User
 public:
     Userobisnuit(string u, string p);
     void displayRole() override;
+    bool isAdmin() { return false; }
 };
 
 #endif

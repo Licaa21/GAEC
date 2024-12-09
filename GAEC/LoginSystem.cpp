@@ -94,6 +94,8 @@ void LoginSystem::loadUsersFromFile(const string& filename)
 		if (username == "ADMIN")
 		{
 			AdaugareUtilizator(new Admin(username, password));
+			
+			
 		}
 		else
 		{

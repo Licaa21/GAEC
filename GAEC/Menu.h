@@ -69,6 +69,7 @@ User* Login(LoginSystem sistem,bool& succes)
                     {
                         loggedInUser->displayRole();
                         succes = true;
+                        
                         return loggedInUser;
                     }
                     else
@@ -111,7 +112,6 @@ User* Login(LoginSystem sistem,bool& succes)
 
 void FirstUserMenu(bool& backToLogin)
 {
-    cout << "PULA" << endl;
 }
 void FirstMenu(bool& backToLogin)
 {

@@ -8,7 +8,6 @@ int main()
     bool backToLogin = false;
     LoginSystem sistem;
     User* loggedInUser = nullptr;
-
     sistem.loadUsersFromFile("users.txt");
     sistem.AdaugareUtilizator(new Admin("ADMIN", "admin123"));
     while (!succes)
@@ -18,11 +17,11 @@ int main()
         if (loggedInUser)
         {
             backToLogin = false;
-            if (dynamic_cast<Admin*>(loggedInUser))
+            if ()
             {
                 FirstMenu(backToLogin);
             }
-            else if (dynamic_cast<Userobisnuit*>(loggedInUser))
+            else if ()
             {
                 FirstUserMenu(backToLogin);
             }
