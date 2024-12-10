@@ -8,7 +8,6 @@ class Admin : public User
 public:
 	Admin(string u, string p);
 	void displayRole() override;
-	bool isAdmin() { return true; } //
+	bool isAdmin() { return true; }
 };
-
 #endif

@@ -7,6 +7,7 @@ int main()
     bool succes = false;
     bool backToLogin = false;
     LoginSystem sistem;
+    User isAdmin();
     User* loggedInUser = nullptr;
     sistem.loadUsersFromFile("users.txt");
     sistem.AdaugareUtilizator(new Admin("ADMIN", "admin123"));
@@ -17,11 +18,11 @@ int main()
         if (loggedInUser)
         {
             backToLogin = false;
-            if ()
+            if (isAdmin)
             {
                 FirstMenu(backToLogin);
             }
-            else if ()
+            else if (!isAdmin)
             {
                 FirstUserMenu(backToLogin);
             }
