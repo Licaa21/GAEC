@@ -18,16 +18,14 @@ int main()
         if (loggedInUser)
         {
             backToLogin = false;
-            if (isAdmin)
+            if (loggedInUser->isAdmin())
             {
                 FirstMenu(backToLogin);
             }
-            else if (!isAdmin)
+            else
             {
                 FirstUserMenu(backToLogin);
             }
-            else
-                succes = false;
             if (backToLogin)
             {
                 succes = false;
