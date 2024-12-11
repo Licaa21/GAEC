@@ -6,10 +6,14 @@
 #include <sstream>
 #include <vector>
 #include "Student.h"
+#include "ClubManager.h"
 #include "StudentManager.h"
 #include "LoginSystem.h"
 #include "Admin.h"
 #include "Userobisnuit.h"
+
+using namespace std;
+
 User* Login(LoginSystem& sistem,bool& succes)
 {
     succes = false;
@@ -112,9 +116,8 @@ User* Login(LoginSystem& sistem,bool& succes)
 
 void FirstUserMenu(LoginSystem& sistem,const string& loggedInUsername)
 {
-    int stop = 1;
-    int n;
-
+    int n,stop,stopthis,stopthiss;
+    stop = 1;
     while (stop > 0)
     {
         system("cls");
@@ -127,7 +130,7 @@ void FirstUserMenu(LoginSystem& sistem,const string& loggedInUsername)
         cout << '\n';
         cout << "2. Vizualizarea profilului" << '\n';
         cout << '\n';
-        cout << "3. wip." << '\n';
+        cout << "3. Gestionarea Activitatilor" << '\n';
         cout << '\n';
         cout << "4. Inapoi la meniul de logare." << '\n';
         cout << '\n';
@@ -156,7 +159,81 @@ void FirstUserMenu(LoginSystem& sistem,const string& loggedInUsername)
             break;
         }
         case 3:
-            system("cls");
+            stopthis = 1;
+            while (stopthis > 0)
+            {
+                system("cls");
+                cout << '\n';
+                cout << "===============================" << '\n';
+                cout << "=         GAEC PROGRAM        =" << '\n';
+                cout << "===============================" << '\n';
+                cout << '\n';
+                cout << "1. Gestionarea cluburilor." << '\n';
+                cout << '\n';
+                cout << "2. Gestionarea evenimentelor." << '\n';
+                cout << '\n';
+                cout << "3. Inapoi la meniul principal." << '\n';
+                cout << '\n';
+                cout << "Alegeti un numar pentru a continua. (1-3)" << '\n';
+                cout << '\n';
+                cin >> n;
+                cout << '\n';
+                switch (n)
+                {
+                case 1:
+                {
+                    ClubManager club;
+                    stopthiss = 1;
+                    while (stopthiss > 0)
+                    {
+                        system("cls");
+                        cout << '\n';
+                        cout << "===============================" << '\n';
+                        cout << "=         GAEC PROGRAM        =" << '\n';
+                        cout << "===============================" << '\n';
+                        cout << '\n';
+                        cout << "1. Creearea unui club de membri." << '\n';
+                        cout << '\n';
+                        cout << "2. Vizualizarea datelor unui club." << '\n';
+                        cout << '\n';
+                        cout << "3. Inapoi la meniul anterior." << '\n';
+                        cout << '\n';
+                        cout << "Alegeti un numar pentru a continua. (1-3)" << '\n';
+                        cout << '\n';
+                        cin >> n;
+                        switch (n)
+                        {
+                        case 1:
+                            club.Inregistrare();
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+                            stopthiss = 0;
+                            break;
+                        default:
+                            cout << "Optiune invalida.\n";
+                            cin.ignore();
+                            cin.get();
+                            break;
+                        }
+                    }
+                }
+                    break;
+                case 2:
+                    // Add functionality for assigning a student to an club
+                    break;
+                case 3:
+                    stopthis = 0;
+                    break;
+                default:
+                    cout << "Optiune invalida.\n";
+                    cin.ignore();
+                    cin.get();
+                    break;
+                }
+            }
+            break;
             break;
         case 4:
             system("cls");
@@ -282,21 +359,20 @@ void FirstMenu()
                     stopthiss = 1;
                     while (stopthiss > 0)
                     {
+                        ClubManager club;
                         system("cls");
                         cout << '\n';
                         cout << "===============================" << '\n';
                         cout << "=         GAEC PROGRAM        =" << '\n';
                         cout << "===============================" << '\n';
                         cout << '\n';
-                        cout << "1. Creearea unui club." << '\n';
+                        cout << "1. Afisarea tuturor cluburilor." << '\n';
                         cout << '\n';
-                        cout << "2. Afisarea tuturor cluburilor." << '\n';
+                        cout << "2. Schimbarea datelor unui club." << '\n';
                         cout << '\n';
-                        cout << "3. Schimbarea datelor unui club." << '\n';
+                        cout << "3. Stergerea unui club" << '\n';
                         cout << '\n';
-                        cout << "4. Stergerea unui club" << '\n';
-                        cout << '\n';
-                        cout << "5. Inapoi la meniul anterior." << '\n';
+                        cout << "4. Inapoi la meniul anterior." << '\n';
                         cout << '\n';
                         cout << "Alegeti un numar pentru a continua. (1-4)" << '\n';
                         cout << '\n';
@@ -304,14 +380,13 @@ void FirstMenu()
                         switch (n)
                         {
                         case 1:
+                            club.Afisaretext();
                             break;
                         case 2:
                             break;
                         case 3:
                             break;
                         case 4:
-                            break;
-                        case 5:
                             stopthiss = 0;
                             break;
                         default:

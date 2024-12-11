@@ -100,7 +100,7 @@ bool StudentManager::isEmpty()
 	ifstream file(filename);
 	if (!file)
 	{
-		cerr << "Error: Could not open file." << endl;
+		cerr << "S-a produs o eroare." << endl;
 		return false;
 	}
 

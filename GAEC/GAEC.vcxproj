@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="Admin.cpp" />
     <ClCompile Include="Club.cpp" />
+    <ClCompile Include="ClubManager.cpp" />
     <ClCompile Include="GAEC.cpp" />
     <ClCompile Include="LoginSystem.cpp" />
     <ClCompile Include="Student.cpp" />
@@ -139,6 +140,7 @@
   <ItemGroup>
     <ClInclude Include="Admin.h" />
     <ClInclude Include="Club.h" />
+    <ClInclude Include="ClubManager.h" />
     <ClInclude Include="LoginSystem.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Student.h" />
@@ -147,6 +149,7 @@
     <ClInclude Include="Userobisnuit.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="cluburi.txt" />
     <Text Include="Studenti.txt" />
     <Text Include="users.txt" />
   </ItemGroup>

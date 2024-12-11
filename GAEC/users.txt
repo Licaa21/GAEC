@@ -45,3 +45,5 @@ razvan_cristea ababab 0
 florin_petcu ababab 0
 alexandra_m ababab 0
 diana_roman ababab 0
+a a 1
+b b 0

@@ -39,6 +39,9 @@
     <ClCompile Include="LoginSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ClubManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Student.h">
@@ -65,9 +68,13 @@
     <ClInclude Include="LoginSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ClubManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Studenti.txt" />
     <Text Include="users.txt" />
+    <Text Include="cluburi.txt" />
   </ItemGroup>
 </Project>

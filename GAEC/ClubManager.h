@@ -1,26 +1,25 @@
 #pragma once
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <vector>
-#include "Student.h"
+#include "Club.h"
 
 using namespace std;
 
-class StudentManager
+class ClubManager
 {
 private:
-	vector<Student> students;
-	const string filename = "Studenti.txt";
+	vector<Club> cluburi;
+	const string filename = "cluburi.txt";
 
 	void loadFromFile();
 	void saveToFile() const;
 
 public:
-	StudentManager();
+	ClubManager();
 	void Inregistrare();
 	void Afisaretext();
-	void Changedata();
-	void StergereStudent();
 	bool isEmpty();
 };
 
