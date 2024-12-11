@@ -145,6 +145,7 @@ void FirstUserMenu(LoginSystem& sistem,const string& loggedInUsername)
             manager.Inregistrare();
             cin.ignore();
             cin.get();
+            break;
         }
         case 2: 
         {
@@ -214,43 +215,36 @@ void FirstMenu()
                 cout << "=         GAEC PROGRAM        =" << '\n';
                 cout << "===============================" << '\n';
                 cout << '\n';
-                cout << "1. Inscrierea unui student in program." << '\n';
+                cout << "1. Afisarea listei tuturor studentilor inscrisi in program." << '\n';
                 cout << '\n';
-                cout << "2. Afisarea listei tuturor studentilor inscrisi in program." << '\n';
+                cout << "2. Schimbarea datelor unui student in program." << '\n';
                 cout << '\n';
-                cout << "3. Schimbarea datelor unui student in program." << '\n';
+                cout << "3. Stergerea unui student din program." << '\n';
                 cout << '\n';
-                cout << "4. Stergerea unui student din program." << '\n';
+                cout << "4. Inapoi la meniul principal." << '\n';
                 cout << '\n';
-                cout << "5. Inapoi la meniul principal." << '\n';
-                cout << '\n';
-                cout << "Alegeti un numar pentru a continua. (1-5)" << '\n';
+                cout << "Alegeti un numar pentru a continua. (1-4)" << '\n';
                 cout << '\n';
                 cin >> n;
                 cout << '\n';
                 switch (n)
                 {
                 case 1:
-                    manager.Inregistrare();
-                    cin.ignore();
-                    cin.get();
-                    break;
-                case 2:
                     manager.Afisaretext();
                     cin.ignore();
                     cin.get();
                     break;
-                case 3:
+                case 2:
                     manager.Changedata();
                     cin.ignore();
                     cin.get();
                     break;
-                case 4:
+                case 3:
                     manager.StergereStudent();
                     cin.ignore();
                     cin.get();
                     break;
-                case 5:
+                case 4:
                     stopthis = 0;
                     break;
                 default:
