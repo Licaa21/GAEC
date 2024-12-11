@@ -115,7 +115,7 @@ bool StudentManager::isEmpty()
 
 	return true;
 }
-void StudentManager::Afisaretext()
+void StudentManager::Afisaretext() // Fa sa apara mai frumos cu prenume nume facultate etc..
 {
 	system("cls");
 	ifstream file("Studenti.txt");
