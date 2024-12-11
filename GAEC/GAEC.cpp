@@ -5,31 +5,25 @@ using namespace std;
 int main()
 {
     bool succes = false;
-    bool backToLogin = false;
     LoginSystem sistem;
-    User isAdmin();
     User* loggedInUser = nullptr;
     sistem.loadUsersFromFile("users.txt");
-    sistem.AdaugareUtilizator(new Admin("ADMIN", "admin123"));
+    sistem.AdaugareUtilizator(new Admin("admin", "admin123"));
     while (!succes)
     {
         loggedInUser = Login(sistem,succes);
 
         if (loggedInUser)
         {
-            backToLogin = false;
             if (loggedInUser->isAdmin())
             {
-                FirstMenu(backToLogin);
+                FirstMenu();
             }
             else
             {
-                FirstUserMenu(backToLogin);
+                FirstUserMenu();
             }
-            if (backToLogin)
-            {
-                succes = false;
-            }
+            succes = false;
         }
     }
 

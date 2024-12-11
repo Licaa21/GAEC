@@ -1,3 +1,4 @@
+#include "LoginSystem.h"
 #include "StudentManager.h"
 #include <string>
 #include <fstream>
@@ -37,6 +38,7 @@ void StudentManager::saveToFile() const
 }
 void StudentManager::Inregistrare()
 {
+	LoginSystem 
 	system("cls");
 	ofstream o("Studenti.txt", std::ios::app);
 	if (!o.is_open())

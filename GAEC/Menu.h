@@ -10,7 +10,7 @@
 #include "LoginSystem.h"
 #include "Admin.h"
 #include "Userobisnuit.h"
-User* Login(LoginSystem sistem,bool& succes)
+User* Login(LoginSystem& sistem,bool& succes)
 {
     succes = false;
     int n, stop=1;
@@ -110,10 +110,143 @@ User* Login(LoginSystem sistem,bool& succes)
     return nullptr;
 }
 
-void FirstUserMenu(bool& backToLogin)
+void FirstUserMenu()
 {
+    int stop = 1;
+    int n, stopthis, stopthiss;
+
+    while (stop > 0)
+    {
+        system("cls");
+        cout << '\n';
+        cout << "===============================" << '\n';
+        cout << "=         GAEC PROGRAM        =" << '\n';
+        cout << "===============================" << '\n';
+        cout << '\n';
+        cout << "1. Inscrierea in program ca student." << '\n';
+        cout << '\n';
+        cout << "2. wip." << '\n';
+        cout << '\n';
+        cout << "3. wip." << '\n';
+        cout << '\n';
+        cout << "4. Inapoi la meniul de logare." << '\n';
+        cout << '\n';
+        cout << "5. Inchiderea programului." << '\n';
+        cout << '\n';
+        cout << "Alegeti un numar pentru a continua. (1-4)" << '\n';
+        cout << '\n';
+        cin >> n;
+        cout << '\n';
+        switch (n)
+        {
+        case 1: 
+        {
+            StudentManager manager;
+            stopthis = 1;
+            manager.Inregistrare();
+            cin.ignore();
+            cin.get();
+        }
+        case 2: {
+            stopthis = 1;
+            while (stopthis > 0)
+            {
+                system("cls");
+                cout << '\n';
+                cout << "===============================" << '\n';
+                cout << "=         GAEC PROGRAM        =" << '\n';
+                cout << "===============================" << '\n';
+                cout << '\n';
+                cout << "1. Gestionarea cluburilor." << '\n';
+                cout << '\n';
+                cout << "2. Gestionarea evenimentelor." << '\n';
+                cout << '\n';
+                cout << "3. Inapoi la meniul principal." << '\n';
+                cout << '\n';
+                cout << "Alegeti un numar pentru a continua. (1-3)" << '\n';
+                cout << '\n';
+                cin >> n;
+                cout << '\n';
+                switch (n)
+                {
+                case 1:
+                    stopthiss = 1;
+                    while (stopthiss > 0)
+                    {
+                        system("cls");
+                        cout << '\n';
+                        cout << "===============================" << '\n';
+                        cout << "=         GAEC PROGRAM        =" << '\n';
+                        cout << "===============================" << '\n';
+                        cout << '\n';
+                        cout << "1. Creearea unui club." << '\n';
+                        cout << '\n';
+                        cout << "2. Afisarea tuturor cluburilor." << '\n';
+                        cout << '\n';
+                        cout << "3. Schimbarea datelor unui club." << '\n';
+                        cout << '\n';
+                        cout << "4. Stergerea unui club" << '\n';
+                        cout << '\n';
+                        cout << "5. Inapoi la meniul anterior." << '\n';
+                        cout << '\n';
+                        cout << "Alegeti un numar pentru a continua. (1-4)" << '\n';
+                        cout << '\n';
+                        cin >> n;
+                        switch (n)
+                        {
+                        case 1:
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+                            break;
+                        case 4:
+                            break;
+                        case 5:
+                            stopthiss = 0;
+                            break;
+                        default:
+                            cout << "Optiune invalida.\n";
+                            cin.ignore();
+                            cin.get();
+                            break;
+                        }
+                    }
+                    break;
+                case 2:
+                    // Add functionality for assigning a student to an club
+                    break;
+                case 3:
+                    stopthis = 0;
+                    break;
+                default:
+                    cout << "Optiune invalida.\n";
+                    cin.ignore();
+                    cin.get();
+                    break;
+                }
+            }
+            break;
+        }
+        case 3:
+            system("cls");
+            break;
+        case 4:
+            system("cls");
+            stop = 0;
+            break;
+        case 5:
+            system("cls");
+            exit(0);
+        default:
+            cout << "Optiune invalida. Incercati din nou.\n";
+            cin.ignore();
+            cin.get();
+            break;
+        }
+    }
 }
-void FirstMenu(bool& backToLogin)
+void FirstMenu()
 {
     int stop = 1;
     int n,stopthis,stopthiss;
@@ -287,7 +420,6 @@ void FirstMenu(bool& backToLogin)
             break;
         case 4:
             system("cls");
-            backToLogin = true;
             stop = 0;
             break;
         case 5:
