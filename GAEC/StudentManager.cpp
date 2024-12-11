@@ -38,7 +38,6 @@ void StudentManager::saveToFile() const
 }
 void StudentManager::Inregistrare()
 {
-	LoginSystem 
 	system("cls");
 	ofstream o("Studenti.txt", std::ios::app);
 	if (!o.is_open())
@@ -46,7 +45,26 @@ void StudentManager::Inregistrare()
 		cerr << "S-a produs o eroare" << '\n';
 		return;
 	}
+	ifstream file("users.txt");
+	string loggedInUsername;
+	string line;
+	bool found = false;
 
+	while (getline(file, line))
+	{
+		istringstream ss(line);
+		string username, password;
+		int status;
+		ss >> username >> password >> status;
+
+		if (status == 1)
+		{
+			loggedInUsername = username;
+			found = true;
+			break;
+		}
+	}
+	file.close();
 	Student s;
 	cout << '\n';
 	cout << "===============================" << '\n';
@@ -65,6 +83,7 @@ void StudentManager::Inregistrare()
 	cout << "Varsta:";
 	cin >> s.Varsta;
 	o << s.Varsta << " ";
+	o << loggedInUsername;
 	o << '\n';
 	system("cls");
 	cout << '\n';

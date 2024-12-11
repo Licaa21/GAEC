@@ -18,6 +18,8 @@ public:
 	void inregistrare(const string& username, const string& password);
 	User* autentificare(const string& enteredUsername, const string& enteredPassword);
 	void loadUsersFromFile(const string& filename);
+	void updateUserStatus(const string& username, int status);
+	void seeUserDetails();
 };
 
 #endif

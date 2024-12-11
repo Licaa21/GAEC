@@ -17,11 +17,11 @@ int main()
         {
             if (loggedInUser->isAdmin())
             {
-                FirstMenu();
+                FirstMenu(); 
             }
             else
             {
-                FirstUserMenu();
+                FirstUserMenu(sistem,loggedInUser->getUsername());
             }
             succes = false;
         }
