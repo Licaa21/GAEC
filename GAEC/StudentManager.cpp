@@ -115,7 +115,7 @@ bool StudentManager::isEmpty()
 
 	return true;
 }
-void StudentManager::Afisaretext() // Fa sa apara mai frumos cu prenume nume facultate etc..
+void StudentManager::Afisaretext()
 {
 	system("cls");
 	ifstream file("Studenti.txt");
@@ -140,14 +140,20 @@ void StudentManager::Afisaretext() // Fa sa apara mai frumos cu prenume nume fac
 	else
 	{
 		string line;
+		string Nume, Prenume, Facultate, Varsta, Utilizator;
+		int number=1;
 		cout << '\n';
 		cout << "===============================" << '\n';
 		cout << "=         GAEC PROGRAM        =" << '\n';
 		cout << "===============================" << '\n';
 		cout << '\n';
+		vector<string> lines;
 		while (getline(file, line))
 		{
-			cout << line << '\n';
+			file >> Nume >> Prenume >> Facultate >> Varsta >> Utilizator;
+			cout << number << ". " << "Nume: " << Nume << " " << Prenume << ", " << "Facultate: " << Facultate << ", " << "Varsta: " << Varsta << ", " << "Utilizator: " << Utilizator << '\n';
+			cout << '\n';
+			number++;
 		}
 		cout << '\n';
 		cout << "Apasati tasta enter pentru a reveni la meniul anterior." << '\n';
