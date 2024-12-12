@@ -147,7 +147,6 @@ void FirstUserMenu(LoginSystem& sistem,const string& loggedInUsername)
             StudentManager manager;
             manager.Inregistrare();
             cin.ignore();
-            cin.get();
             break;
         }
         case 2: 
@@ -194,21 +193,32 @@ void FirstUserMenu(LoginSystem& sistem,const string& loggedInUsername)
                         cout << '\n';
                         cout << "1. Creearea unui club de membri." << '\n';
                         cout << '\n';
-                        cout << "2. Vizualizarea datelor unui club." << '\n';
+                        cout << "2. Alatura-te unui club." << '\n';
                         cout << '\n';
-                        cout << "3. Inapoi la meniul anterior." << '\n';
+                        cout << "3. Vizualizarea datelor unui club." << '\n';
                         cout << '\n';
-                        cout << "Alegeti un numar pentru a continua. (1-3)" << '\n';
+                        cout << "4. Inapoi la meniul anterior." << '\n';
+                        cout << '\n';
+                        cout << "Alegeti un numar pentru a continua. (1-4)" << '\n';
                         cout << '\n';
                         cin >> n;
                         switch (n)
                         {
                         case 1:
                             club.Inregistrare();
+                            cin.ignore();
                             break;
                         case 2:
+                            club.join();
+                            cin.ignore();
+                            cin.get();
                             break;
                         case 3:
+                            club.Afisaretext();
+                            cin.ignore();
+                            cin.get();
+                            break;
+                        case 4:
                             stopthiss = 0;
                             break;
                         default:

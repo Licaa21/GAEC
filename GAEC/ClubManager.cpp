@@ -70,14 +70,15 @@ void ClubManager::Inregistrare()
 	cout << "=         GAEC PROGRAM        =" << '\n';
 	cout << "===============================" << '\n';
 	cout << '\n';
-	cout << "Numele:";
-	cin >> s.Nume;
+	cout << "Clubul:";
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
+	getline(cin,s.Nume);
 	o << s.Nume << " ";
 	cout << "Tip:";
-	cin >> s.Tip;
+	getline(cin, s.Tip);
 	o << s.Tip << " ";
-	cout << "Facultatea:";   // fiecare variabla sa aiba minim 2 cuvinte wip
-	cin >> s.Facultate;
+	cout << "Facultatea:";
+	getline(cin, s.Facultate);
 	o << s.Facultate << " ";
 	o << loggedInUsername;
 	o << '\n';
@@ -144,11 +145,10 @@ void ClubManager::Afisaretext()
 		cout << "=         GAEC PROGRAM        =" << '\n';
 		cout << "===============================" << '\n';
 		cout << '\n';
-		vector<string> lines;
 		while (getline(file, line))
 		{
 			file >> Nume >> Tip >> Facultate  >> Utilizator;
-			cout << number << ". " << "Nume: " << Tip << " " << ", " << "Facultate: " << Facultate << ", " << "Utilizator: " << Utilizator << '\n';
+			cout << number << ". " << "Nume: Clubul " << Nume << ", " << "Tip: " << Tip << ", " << "Facultate: " << Facultate << ", " << "Utilizator: " << Utilizator << '\n';
 			cout << '\n';
 			number++;
 		}
@@ -158,4 +158,102 @@ void ClubManager::Afisaretext()
 	}
 
 	file.close();
+}
+
+void ClubManager::join()
+{
+	ifstream s("cluburi.txt");
+
+	if (isEmpty())
+	{
+		system("cls");
+		cout << '\n';
+		cout << "===============================" << '\n';
+		cout << "=         GAEC PROGRAM        =" << '\n';
+		cout << "===============================" << '\n';
+		cout << '\n';
+		cout << "Nu exista niciun club creat in program." << '\n';
+		cout << '\n';
+		cout << "Apasati tasta enter pentru a reveni la meniul anterior." << '\n';
+		cin.ignore();
+		cin.get();
+		return;
+	}
+
+	vector<string> clubs;
+	string Nume, Tip, Facultate, Utilizator;
+	string line;
+	int number = 1;
+	system("cls");
+	cout << '\n';
+	cout << "===============================" << '\n';
+	cout << "=         GAEC PROGRAM        =" << '\n';
+	cout << "===============================" << '\n';
+	cout << '\n';
+
+	while (s >> Nume >> Tip >> Facultate >> Utilizator)
+	{
+		clubs.push_back(Nume + " " + Tip + " " + Facultate + " " + Utilizator);
+		cout << number << ". Nume: Clubul " << Nume << ", Tip: " << Tip << ", Facultate: " << Facultate << ", Creator: " << Utilizator << '\n';
+		cout << '\n';
+		number++;
+	}
+
+	if (clubs.empty())
+	{
+		cout << "Nu exista cluburi in fisierul cluburi.txt." << '\n';
+		return;
+	}
+
+	cout << "Alegeti clubul din care doriti sa faceti parte (1-" << clubs.size() << ")." << '\n';
+
+	int n;
+	cin >> n;
+
+	if (n < 1 || n >(int)clubs.size())
+	{
+		cout << "Selectie invalida." << '\n';
+		return;
+	}
+
+	fstream file("users.txt", std::ios::in | std::ios::out);
+	string loggedInUsername;
+	vector<string> users;
+	bool found = false;
+
+	while (getline(file, line))
+	{
+		istringstream ss(line);
+		string username, password;
+		int status, clubID;
+		ss >> username >> password >> status >> clubID;
+
+		if (status == 1 && !found)
+		{
+			loggedInUsername = username;
+			found = true;
+			clubID = n;
+		}
+
+		users.push_back(username + " " + password + " " + to_string(status) + " " + to_string(clubID));
+	}
+
+	if (!found)
+	{
+		cout << "Nu exista utilizatori conectati." << '\n';
+		return;
+	}
+
+	file.close();
+	file.open("users.txt", std::ios::out | std::ios::trunc);
+
+	for (const string& user : users)
+	{
+		file << user << '\n';
+	}
+
+	cout << "Ati fost adaugat cu succes in clubul selectat!" << '\n';
+
+	file.close();
+	s.close();
 }

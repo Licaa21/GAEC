@@ -104,14 +104,14 @@ void LoginSystem::updateUserStatus(const string& username, int status)
 	{
 		istringstream ss(line);
 		string user, password;
-		int currentStatus;
+		int currentStatus, clubID;
 
-		ss >> user >> password >> currentStatus;
+		ss >> user >> password >> currentStatus >> clubID;
 
 		if (user == username)
 		{
 			ostringstream updatedLine;
-			updatedLine << user << " " << password << " " << status;
+			updatedLine << user << " " << password << " " << status << " " << clubID;
 			lines.push_back(updatedLine.str());
 		}
 		else
@@ -119,9 +119,9 @@ void LoginSystem::updateUserStatus(const string& username, int status)
 			lines.push_back(line);
 		}
 	}
-	
+
 	file.close();
-	file.open("users.txt",ios::out | ios::trunc);
+	file.open("users.txt", ios::out | ios::trunc);
 
 	for (const string& updatedLine : lines)
 	{
@@ -144,13 +144,15 @@ User* LoginSystem::autentificare(const string& enteredUsername, const string& en
 	}
 	if (!user->login(enteredUsername, enteredPassword))
 	{
-		cout <<"Parola este gresita pentru utilizatorul: " << enteredUsername << '\n';
+		cout << "Parola este gresita pentru utilizatorul: " << enteredUsername << '\n';
 		return nullptr;
 	}
+
 	updateUserStatus(enteredUsername, 1);
 
 	return user;
 }
+
 
 void LoginSystem::seeUserDetails()
 {
@@ -158,13 +160,14 @@ void LoginSystem::seeUserDetails()
 	string loggedInUsername;
 	string line1;
 	bool found = false;
+	int numarclub;
 
 	while (getline(file, line1))
 	{
 		istringstream ss(line1);
 		string username, password;
 		int status;
-		ss >> username >> password >> status;
+		ss >> username >> password >> status >> numarclub;
 
 		if (status == 1)
 		{
@@ -190,12 +193,58 @@ void LoginSystem::seeUserDetails()
 			if (user == loggedInUsername)
 			{
 				statusstudent = true;
-				break; 
+				break;
 			}
 		}
 		o.close();
 
+		ifstream f("cluburi.txt");
+		bool statusclub = false;
+		string line3;
 
+		while (getline(f, line3))
+		{
+			istringstream ss(line3);
+			string Nume, Tip, Facultate, user;
+			ss >> Nume >> Tip >> Facultate >> user;
+
+			if (user == loggedInUsername)
+			{
+				statusclub = true;
+				break;
+			}
+		}
+		f.close();
+	
+		ifstream s("cluburi.txt");
+		vector<string> clubs;
+		string Nume, Tip, Facultate, Utilizator;
+		system("cls");
+		cout << '\n';
+		cout << "===============================" << '\n';
+		cout << "=         GAEC PROGRAM        =" << '\n';
+		cout << "===============================" << '\n';
+		cout << '\n';
+
+		while (s >> Nume >> Tip >> Facultate >> Utilizator)
+		{
+			clubs.push_back("Nume: Clubul " + Nume + ", Tip: " + Tip + ", Facultate: " + Facultate + ", Creator: " + Utilizator);
+		}
+		s.close();	
+		string numeclub = "Nu faci parte din niciun club.";
+		if (numarclub > 0 && numarclub <= (int)clubs.size())
+		{
+			numeclub = clubs[numarclub - 1];
+		}
+		int statussclub;
+		if (numeclub == "Nu faci parte din niciun club.")
+		{
+			statussclub = false;
+		}
+		else
+		{
+			statussclub = true;
+		}
 		system("cls");
 		cout << '\n';
 		cout << "===============================" << '\n';
@@ -206,14 +255,22 @@ void LoginSystem::seeUserDetails()
 		cout << '\n';
 		cout << "Student inscris: " << (statusstudent ? "Da" : "Nu") << '\n';
 		cout << '\n';
+		cout << "Creator de club: " << (statusclub ? "Da" : "Nu") << '\n';
+		cout << '\n';
+		cout << "Membru intr-un club: "<< (statussclub ? "Da" : "Nu");
+		if (statussclub == true)
+		{
+			cout << " (" << numeclub << ")"<<'\n';
+		}
+		cout << '\n';
+		cout << "Apasati tasta enter pentru a reveni la meniul anterior." << '\n';
+		
 	}
 	else
 	{
 		cout << "No logged-in user found.\n";
 	}
 }
-
-
 void LoginSystem::loadUsersFromFile(const string& filename)
 {
 	ifstream userFile(filename);

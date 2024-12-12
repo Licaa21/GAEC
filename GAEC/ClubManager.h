@@ -21,5 +21,6 @@ public:
 	void Inregistrare();
 	void Afisaretext();
 	bool isEmpty();
+	void join();
 };
 
