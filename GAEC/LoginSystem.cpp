@@ -104,7 +104,7 @@ void LoginSystem::updateUserStatus(const string& username, int status)
 	{
 		istringstream ss(line);
 		string user, password;
-		int currentStatus, clubID;
+		int currentStatus =0, clubID = 0;
 
 		ss >> user >> password >> currentStatus >> clubID;
 
@@ -257,7 +257,7 @@ void LoginSystem::seeUserDetails()
 		cout << '\n';
 		cout << "Creator de club: " << (statusclub ? "Da" : "Nu") << '\n';
 		cout << '\n';
-		cout << "Membru intr-un club: "<< (statussclub ? "Da" : "Nu");
+		cout << "Membru intr-un club: "<< (statussclub ? "Da" : "Nu")<<'\n';
 		if (statussclub == true)
 		{
 			cout << " (" << numeclub << ")"<<'\n';
