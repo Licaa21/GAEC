@@ -22,5 +22,8 @@ public:
 	void Afisaretext();
 	bool isEmpty();
 	void join();
+	void StergereClub();
+	void ChangeData();
+	void ChangeDataAdmin();
 };
 

@@ -211,9 +211,8 @@ void ClubManager::Afisaretext()
 		cout << "=         GAEC PROGRAM        =" << '\n';
 		cout << "===============================" << '\n';
 		cout << '\n';
-		while (getline(file, line))
+		while (file >> Nume >> Tip >> Facultate >> Utilizator)
 		{
-			file >> Nume >> Tip >> Facultate  >> Utilizator;
 			cout << number << ". " << "Nume: Clubul " << Nume << ", " << "Tip: " << Tip << ", " << "Facultate: " << Facultate << ", " << "Utilizator: " << Utilizator << '\n';
 			cout << '\n';
 			number++;
@@ -389,5 +388,390 @@ void ClubManager::join()
 		cout << "Nu exista un student inscris pentru contul tau." << '\n';
 		cout << '\n';
 		cout << "Apasati tasta enter pentru a reveni la meniul anterior." << '\n';
+	}
+}
+void ClubManager::StergereClub()
+{
+	system("cls");
+	ifstream file("cluburi.txt");
+	if (!file.is_open())
+	{
+		cerr << "S-a produs o eroare." << '\n';
+		return;
+	}
+
+	vector<string> lines;
+	string line;
+	while (getline(file, line))
+	{
+		lines.push_back(line);
+	}
+	file.close();
+
+	if (lines.empty())
+	{
+		cout << '\n';
+		cout << "===============================" << '\n';
+		cout << "=         GAEC PROGRAM        =" << '\n';
+		cout << "===============================" << '\n';
+		cout << '\n';
+		cout << "Nu este niciun club creat in programul nostru." << '\n';
+		cout << '\n';
+		cout << "Apasati tasta enter pentru a reveni la meniul anterior." << '\n';
+		return;
+	}
+	cout << '\n';
+	cout << "===============================" << '\n';
+	cout << "=         GAEC PROGRAM        =" << '\n';
+	cout << "===============================" << '\n';
+	cout << '\n';
+	cout << "Lista de cluburi: " << '\n';
+	for (size_t i = 0; i < lines.size(); i++)
+	{
+		cout << i + 1 << ". " << lines[i] << '\n';
+	}
+	int nrclub;
+	cout << "Numarul clubului pe care doriti sa-l stergeti. ( 0 pentru a iesi )" << '\n';
+	cin >> nrclub;
+	if (nrclub == 0)
+	{
+		cout << '\n';
+		cout << "Apasati tasta enter pentru a reveni la meniul anterior." << '\n';
+		return;
+	}
+
+	if (nrclub < 1 || nrclub > lines.size())
+	{
+		cout << '\n';
+		cout << "===============================" << '\n';
+		cout << "=         GAEC PROGRAM        =" << '\n';
+		cout << "===============================" << '\n';
+		cout << '\n';
+		cout << "Numarul clubului este invalid." << '\n';
+		cout << '\n';
+		cout << "Apasati tasta enter pentru a reveni la meniul anterior." << '\n';
+		return;
+	}
+
+	lines.erase(lines.begin() + nrclub - 1);
+
+	ofstream outFile("cluburi.txt");
+	if (!outFile.is_open())
+	{
+		cerr << "S-a produs o eroare." << '\n';
+		return;
+	}
+	for (const auto& l : lines)
+	{
+		outFile << l << endl;
+	}
+	outFile.close();
+	system("cls");
+	cout << '\n';
+	cout << "===============================" << '\n';
+	cout << "=         GAEC PROGRAM        =" << '\n';
+	cout << "===============================" << '\n';
+	cout << '\n';
+	cout << "Clubul a fost sters din program." << '\n';
+}
+void ClubManager::ChangeData()
+{
+	system("cls");
+	ifstream file("cluburi.txt");
+	vector<string> lines;
+	string line;
+	while (getline(file, line))
+	{
+		lines.push_back(line);
+	}
+	if (isEmpty() == true)
+	{
+		cout << '\n';
+		cout << "===============================" << '\n';
+		cout << "=         GAEC PROGRAM        =" << '\n';
+		cout << "===============================" << '\n';
+		cout << '\n';
+		cout << "Nu exista niciun club inscris in program." << '\n';
+		cout << '\n';
+		cout << "Apasati tasta enter pentru a reveni la meniul anterior." << '\n';
+		return;
+	}
+	file.close();
+
+	ifstream f("users.txt", std::ios::in | std::ios::out);
+	string loggedInUsername;
+	string linef;
+	vector<string> users;
+	bool found = false;
+	int clubID;
+
+	while (getline(f, linef))
+	{
+		istringstream ss(linef);
+		string username, password;
+		int status;
+		ss >> username >> password >> status >> clubID;
+
+		if (status == 1 && !found)
+		{
+			loggedInUsername = username;
+			found = true;
+		}
+	}
+
+	cout << '\n';
+	cout << "===============================" << '\n';
+	cout << "=         GAEC PROGRAM        =" << '\n';
+	cout << "===============================" << '\n';
+	cout << '\n';
+	cout << "Lista cluburilor create:" << '\n';
+	for (size_t i = 0; i < lines.size(); i++)
+	{
+		cout << i + 1 << ". " << lines[i] << '\n';
+	}
+
+	int nrclub;
+	cout << "Introduceti numarul clubului pe care doriti sa il modificati. ( 0 pentru a iesi ):" << '\n';
+	cin >> nrclub;
+
+	if (!cin || nrclub < 0 || static_cast<size_t>(nrclub) > lines.size())
+	{
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		cout << '\n';
+		cout << "Optiune invalida. Incercati din nou." << '\n';
+		return;
+	}
+
+	if (nrclub == 0)
+	{
+		return;
+	}
+
+	string nume, tip, facultate, user;
+	istringstream ss(lines[nrclub - 1]);
+	ss >> nume >> tip >> facultate >> user;
+
+	bool clublider = (loggedInUsername == user);
+
+	if (clublider)
+	{
+		int a;
+		do
+		{
+			system("cls");
+			cout << '\n';
+			cout << "===============================" << '\n';
+			cout << "=         GAEC PROGRAM        =" << '\n';
+			cout << "===============================" << '\n';
+			cout << '\n';
+			cout << "Student selectat: " << nume << " " << tip << " " << facultate << " Creator: " << user << "." << '\n';
+			cout << '\n';
+			cout << "Ce doriti sa schimbati ?" << '\n';
+			cout << '\n';
+			cout << "1. Numele." << '\n';
+			cout << "2. Tipul." << '\n';
+			cout << "3. Facultatea." << '\n';
+			cout << "4. Finalizare modificari." << '\n';
+			cout << '\n';
+			cout << "Alegeti un numar pentru a continua. (1-4)" << '\n';
+			cout << '\n';
+			cin >> a;
+
+			switch (a)
+			{
+			case 1:
+				cout << '\n';
+				cout << "Introduceti noul nume: " << '\n';
+				cin >> nume;
+				break;
+			case 2:
+				cout << '\n';
+				cout << "Introduceti noul tip: " << '\n';
+				cin >> tip;
+				break;
+			case 3:
+				cout << '\n';
+				cout << "Introduceti noua facultate: " << '\n';
+				cin >> facultate;
+				break;
+			case 4:
+				system("cls");
+				cout << '\n';
+				cout << "===============================" << '\n';
+				cout << "=         GAEC PROGRAM        =" << '\n';
+				cout << "===============================" << '\n';
+				cout << '\n';
+				cout << "Modificarile au fost salvate." << '\n';
+				cout << '\n';
+				cout << "Apasati tasta enter pentru a reveni la meniul anterior." << '\n';
+				cout << '\n';
+				break;
+			default:
+				cout << "Optiune invalida. Incercati din nou." << '\n';
+				break;
+			}
+		} while (a != 4);
+
+		ostringstream updatedLine;
+		updatedLine << nume << " " << tip << " " << facultate << " " << user;
+		lines[nrclub - 1] = updatedLine.str();
+
+		ofstream outFile("cluburi.txt");
+		if (!outFile.is_open())
+		{
+			cerr << "S-a produs o eroare." << '\n';
+			return;
+		}
+		for (const auto& l : lines)
+		{
+			outFile << l << endl;
+		}
+		outFile.close();
+	}
+	else
+	{
+		system("cls");
+		cout << '\n';
+		cout << "===============================" << '\n';
+		cout << "=         GAEC PROGRAM        =" << '\n';
+		cout << "===============================" << '\n';
+		cout << '\n';
+		cout << "Nu aveti acces ca sa modificati datele clubului" << '\n';
+		cout << '\n';
+		cout << "Apasati tasta enter pentru a reveni la meniul anterior." << '\n';
+		cout << '\n';
+	}
+}
+
+void ClubManager::ChangeDataAdmin()
+{
+	system("cls");
+	ifstream file("cluburi.txt");
+	vector<string> lines;
+	string line;
+	while (getline(file, line))
+	{
+		lines.push_back(line);
+	}
+	if (isEmpty() == true)
+	{
+		cout << '\n';
+		cout << "===============================" << '\n';
+		cout << "=         GAEC PROGRAM        =" << '\n';
+		cout << "===============================" << '\n';
+		cout << '\n';
+		cout << "Nu exista niciun club inscris in program." << '\n';
+		cout << '\n';
+		cout << "Apasati tasta enter pentru a reveni la meniul anterior." << '\n';
+		cout << '\n';
+		return;
+	}
+	file.close();
+	cout << '\n';
+	cout << "===============================" << '\n';
+	cout << "=         GAEC PROGRAM        =" << '\n';
+	cout << "===============================" << '\n';
+	cout << '\n';
+	cout << "Lista cluburilor create:" << '\n';
+	for (size_t i = 0; i < lines.size(); i++)
+	{
+		cout << i + 1 << ". " << lines[i] << '\n';
+	}
+
+	int nrclub;
+	cout << "Introduceti numarul clubului pe care doriti sa il modificati. ( 0 pentru a iesi ):" << '\n';
+	cin >> nrclub;
+
+	if (!cin || nrclub < 0 || static_cast<size_t>(nrclub) > lines.size())
+	{
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		cout << '\n';
+		cout << "Optiune invalida. Incercati din nou." << '\n';
+		return;
+	}
+
+	if (nrclub == 0)
+	{
+		return;
+	}
+
+	string nume, tip, facultate, user;
+	istringstream ss(lines[nrclub - 1]);
+	ss >> nume >> tip >> facultate >> user;
+	{
+		int a;
+		do
+		{
+			system("cls");
+			cout << '\n';
+			cout << "===============================" << '\n';
+			cout << "=         GAEC PROGRAM        =" << '\n';
+			cout << "===============================" << '\n';
+			cout << '\n';
+			cout << "Student selectat: " << nume << " " << tip << " " << facultate << " Creator: " << user << "." << '\n';
+			cout << '\n';
+			cout << "Ce doriti sa schimbati ?" << '\n';
+			cout << '\n';
+			cout << "1. Numele." << '\n';
+			cout << "2. Tipul." << '\n';
+			cout << "3. Facultatea." << '\n';
+			cout << "4. Finalizare modificari." << '\n';
+			cout << '\n';
+			cout << "Alegeti un numar pentru a continua. (1-4)" << '\n';
+			cout << '\n';
+			cin >> a;
+
+			switch (a)
+			{
+			case 1:
+				cout << '\n';
+				cout << "Introduceti noul nume: " << '\n';
+				cin >> nume;
+				break;
+			case 2:
+				cout << '\n';
+				cout << "Introduceti noul tip: " << '\n';
+				cin >> tip;
+				break;
+			case 3:
+				cout << '\n';
+				cout << "Introduceti noua facultate: " << '\n';
+				cin >> facultate;
+				break;
+			case 4:
+				system("cls");
+				cout << '\n';
+				cout << "===============================" << '\n';
+				cout << "=         GAEC PROGRAM        =" << '\n';
+				cout << "===============================" << '\n';
+				cout << '\n';
+				cout << "Modificarile au fost salvate." << '\n';
+				cout << '\n';
+				cout << "Apasati tasta enter pentru a reveni la meniul anterior." << '\n';
+				cout << '\n';
+				break;
+			default:
+				cout << "Optiune invalida. Incercati din nou." << '\n';
+				break;
+			}
+		} while (a != 4);
+
+		ostringstream updatedLine;
+		updatedLine << nume << " " << tip << " " << facultate << " " << user;
+		lines[nrclub - 1] = updatedLine.str();
+
+		ofstream outFile("cluburi.txt");
+		if (!outFile.is_open())
+		{
+			cerr << "S-a produs o eroare." << '\n';
+			return;
+		}
+		for (const auto& l : lines)
+		{
+			outFile << l << endl;
+		}
+		outFile.close();
 	}
 }

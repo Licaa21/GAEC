@@ -197,7 +197,9 @@ void FirstUserMenu(LoginSystem& sistem,const string& loggedInUsername)
                         cout << '\n';
                         cout << "3. Vizualizarea datelor unui club." << '\n';
                         cout << '\n';
-                        cout << "4. Inapoi la meniul anterior." << '\n';
+                        cout << "4. Schimbarea datelor unui club." << '\n';
+                        cout << '\n';
+                        cout << "5. Inapoi la meniul anterior." << '\n';
                         cout << '\n';
                         cout << "Alegeti un numar pentru a continua. (1-4)" << '\n';
                         cout << '\n';
@@ -219,6 +221,11 @@ void FirstUserMenu(LoginSystem& sistem,const string& loggedInUsername)
                             cin.get();
                             break;
                         case 4:
+                            club.ChangeData();
+                            cin.ignore();
+                            cin.get();
+                            break;
+                        case 5:
                             stopthiss = 0;
                             break;
                         default:
@@ -393,8 +400,10 @@ void FirstMenu()
                             club.Afisaretext();
                             break;
                         case 2:
+                            club.ChangeDataAdmin();
                             break;
                         case 3:
+                            club.StergereClub();
                             break;
                         case 4:
                             stopthiss = 0;
@@ -408,7 +417,6 @@ void FirstMenu()
                     }
                     break;
                 case 2:
-                    // Add functionality for assigning a student to an club
                     break;
                 case 3:
                     stopthis = 0;
@@ -423,7 +431,45 @@ void FirstMenu()
             break;
         }
         case 3:
-            system("cls");
+        {
+            int stopstop = 1;
+            LoginSystem admin;
+            while (stopstop > 0)
+            {
+
+                system("cls");
+                cout << '\n';
+                cout << "===============================" << '\n';
+                cout << "=         GAEC PROGRAM        =" << '\n';
+                cout << "===============================" << '\n';
+                cout << '\n';
+                cout << "1. Afisarea datelor programului." << '\n';
+                cout << '\n';
+                cout << "2. Inapoi la meniul principal." << '\n';
+                cout << '\n';
+                cout << "Alegeti un numar pentru a continua. (1-2)" << '\n';
+                cout << '\n';
+                int n;
+                cin >> n;
+                switch (n)
+                {
+                case 1:
+                    system("cls");
+                    admin.seeAdministration();
+                    cin.ignore();
+                    break;
+                case 2:
+                    system("cls");
+                    stopstop = 0;
+                    break;
+                default:
+                    cout << "Optiune invalida. Incercati din nou.\n";
+                    cin.ignore();
+                    cin.get();
+                    break;
+                }
+            }
+        }
             break;
         case 4:
             system("cls");

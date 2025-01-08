@@ -306,3 +306,35 @@ void LoginSystem::loadUsersFromFile(const string& filename)
 	}
 	userFile.close();
 }
+int countLines(const string& filename)
+{
+	ifstream file(filename);
+	int linecount = 0;
+	string line;
+	while (getline(file, line))
+	{
+		++linecount;
+	}
+	file.close();
+	return linecount;
+}
+void LoginSystem::seeAdministration()
+{
+	system("cls");
+	cout << '\n';
+	cout << "===============================" << '\n';
+	cout << "=         GAEC PROGRAM        =" << '\n';
+	cout << "===============================" << '\n';
+	cout << '\n';
+	cout << "Statisticile programului" << '\n';
+	cout << '\n';
+	cout << "A.Cluburi create: " << countLines("cluburi.txt") << '\n';
+	cout << '\n';
+	cout << "B.Studenti inscrisi: " << countLines("Studenti.txt") << '\n';
+	cout << '\n';
+	cout << "C.Conturi create: " << countLines("users.txt") << '\n';
+	cout << '\n';
+	cin.ignore();
+	cout << "Apasati tasta enter pentru a reveni la meniul anterior." << '\n';
+	cout << '\n';
+}

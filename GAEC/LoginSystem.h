@@ -20,6 +20,7 @@ public:
 	void loadUsersFromFile(const string& filename);
 	void updateUserStatus(const string& username, int status);
 	void seeUserDetails();
+	void seeAdministration();
 };
 
 #endif
