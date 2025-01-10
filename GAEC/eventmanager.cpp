@@ -724,15 +724,29 @@ void eventmanager::afisare()
 
 	if (!userFound)
 	{
-		cout << "Nu sunteti online sau nu exista un utilizator cu acest status." << '\n';
+		cout << '\n';
+		cout << "===============================" << '\n';
+		cout << "=         GAEC PROGRAM        =" << '\n';
+		cout << "===============================" << '\n';
+		cout << '\n';
+		cout << "S-a creat o eroare si nu sunteti online sau nu exista un utilizator cu acest status." << '\n';
+		cout << '\n';
 		cout << "Apasati tasta Enter pentru a reveni la meniul anterior." << '\n';
+		cin.ignore();
 		return;
 	}
 
 	if (userClubID == -1)
 	{
-		cout << "Nu sunteti online sau nu exista un utilizator cu acest username." << '\n';
+		cout << '\n';
+		cout << "===============================" << '\n';
+		cout << "=         GAEC PROGRAM        =" << '\n';
+		cout << "===============================" << '\n';
+		cout << '\n';
+		cout << "S-a creat o eraore si nu sunteti online sau nu exista un utilizator cu acest username." << '\n';
+		cout << '\n';
 		cout << "Apasati tasta Enter pentru a reveni la meniul anterior." << '\n';
+		cin.ignore();
 		return;
 	}
 
@@ -748,13 +762,35 @@ void eventmanager::afisare()
 
 	if (eventLines.empty())
 	{
+		cout << '\n';
+		cout << "===============================" << '\n';
+		cout << "=         GAEC PROGRAM        =" << '\n';
+		cout << "===============================" << '\n';
+		cout << '\n';
 		cout << "Nu exista niciun eveniment inregistrat." << '\n';
+		cout << '\n';
 		cout << "Apasati tasta Enter pentru a reveni la meniul anterior." << '\n';
+		cin.ignore();
 		return;
 	}
 	eventFile.close();
 
 	bool eventFound = false;
+	ifstream p("users.txt");
+	string line;
+	string nume, parola, status, statusevent;
+	int nrmembri = 0;
+	int clubid;
+	while (getline(p, line))
+	{
+		istringstream ss(line);
+		ss >> nume >> parola >> status >> clubid >> statusevent;
+		
+		if (clubid == userClubID)
+		{
+			nrmembri++;
+		}
+	}
 
 	for (const string& event : eventLines)
 	{
@@ -773,18 +809,27 @@ void eventmanager::afisare()
 			cout << "===============================" << '\n';
 			cout << '\n';
 			cout << "Evenimentul clubului tau: " << '\n';
-			cout << "Eveniment: " << eventName << " , Id-ul clubului din care face parte: " << eventclubid << " , Data: " << eventDate << " , Ora: " << eventHour << '\n';
 			cout << '\n';
+			cout << "Eveniment: " << eventName << " , Id-ul clubului din care face parte: " << eventclubid << " , Data: " << eventDate << " , Ora: " << eventHour << " , Membri: " << nrmembri << '\n';
+			cout << '\n';
+			cout << "Apasati tasta Enter pentru a reveni la meniul anterior." << '\n';
+			cin.ignore();
 			break;
 		}
 	}
 
 	if (!eventFound)
 	{
+		cout << '\n';
+		cout << "===============================" << '\n';
+		cout << "=         GAEC PROGRAM        =" << '\n';
+		cout << "===============================" << '\n';
+		cout << '\n';
 		cout << "Nu exista un eveniment pentru clubul tau." << '\n';
+		cout << '\n';
+		cout << "Apasati tasta Enter pentru a reveni la meniul anterior." << '\n';
+		cout << '\n';
+		cin.ignore();
+		return;
 	}
-
-	cout << "Apasati Enter pentru a reveni." << '\n';
-	cin.ignore();
-	cin.get();
 }

@@ -253,7 +253,6 @@ void ClubManager::join()
 		cout << '\n';
 		cout << "Apasati tasta enter pentru a reveni la meniul anterior." << '\n';
 		cin.ignore();
-		cin.get();
 		return;
 	}
 	ifstream f("users.txt", std::ios::in | std::ios::out);

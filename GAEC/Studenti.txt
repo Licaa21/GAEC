@@ -1,6 +1,5 @@
-﻿a a a 20 a
-b b aceucv 20 b
-f g adg 20 c
-d d ACEUCV 20 d
-
-k k kkk 20 k
+a a a a a
+b b b b b
+c c c c c
+d d d d d
+e e e e e

@@ -374,6 +374,8 @@ void LoginSystem::seeAdministration()
 	cout << '\n';
 	cout << "C.Conturi create: " << countLines("users.txt") << '\n';
 	cout << '\n';
+	cout << "D.Evenimente create: " << countLines("evenimente.txt") << '\n';
+	cout << '\n';
 	cin.ignore();
 	cout << "Apasati tasta enter pentru a reveni la meniul anterior." << '\n';
 	cout << '\n';
