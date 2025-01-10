@@ -23,6 +23,7 @@ public:
 	bool isEmpty();
 	void join();
 	void StergereClub();
+	void StergereClubUser(const string& currentUsername);
 	void ChangeData();
 	void ChangeDataAdmin();
 };

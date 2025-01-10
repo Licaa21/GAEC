@@ -88,7 +88,46 @@ void LoginSystem::inregistrare(const string& username, const string& password)
 	}
 }
 
+void LoginSystem::updateeventstatus(const string& username, int statuseveniment)
+{
+	fstream file("users.txt", ios::in | ios::out);
 
+	if (!file)
+	{
+		cerr << "S-a produs o eroare." << '\n';
+		return;
+	}
+	vector<string> lines;
+	string line;
+	while (getline(file, line))
+	{
+		istringstream ss(line);
+		string user, password;
+		int currentstatus = 0, clubID = 0, eventstatus=0;
+
+		ss >> user >> password >> currentstatus >> clubID >> eventstatus;
+
+		if (user == username)
+		{
+			ostringstream updatedLine;
+			updatedLine << user << " " << password << " " << currentstatus << " " << clubID << " " << statuseveniment;
+			lines.push_back(updatedLine.str());
+
+		}
+		else
+		{
+			lines.push_back(line);
+		}
+	}
+
+	file.close();
+	file.open("users.txt", ios::out | ios::trunc);
+
+	for (const string& updatedLine : lines)
+	{
+		file << updatedLine << '\n';
+	}
+}
 void LoginSystem::updateUserStatus(const string& username, int status)
 {
 	fstream file("users.txt", ios::in | ios::out);
@@ -105,13 +144,14 @@ void LoginSystem::updateUserStatus(const string& username, int status)
 		istringstream ss(line);
 		string user, password;
 		int currentStatus =0, clubID = 0;
+		int eventstatus;
 
-		ss >> user >> password >> currentStatus >> clubID;
+		ss >> user >> password >> currentStatus >> clubID >> eventstatus;
 
 		if (user == username)
 		{
 			ostringstream updatedLine;
-			updatedLine << user << " " << password << " " << status << " " << clubID;
+			updatedLine << user << " " << password << " " << status << " " << clubID << " " << eventstatus;
 			lines.push_back(updatedLine.str());
 		}
 		else

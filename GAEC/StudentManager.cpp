@@ -64,36 +64,71 @@ void StudentManager::Inregistrare()
 			break;
 		}
 	}
-	file.close();
-	Student s;
-	cout << '\n';
-	cout << "===============================" << '\n';
-	cout << "=         GAEC PROGRAM        =" << '\n';
-	cout << "===============================" << '\n';
-	cout << '\n';
-	cout << "Numele:";
-	cin.ignore(numeric_limits<streamsize>::max(), '\n');
-	getline(cin, s.Nume);
-	o << s.Nume << " ";
-	cout << "Prenumele:";
-	getline(cin, s.Prenume);
-	o << s.Prenume << " ";
-	cout << "Facultatea:";
-	getline(cin, s.Facultate);
-	o << s.Facultate << " ";
-	cout << "Varsta:";
-	getline(cin, s.Varsta);
-	o << s.Varsta << " ";
-	o << loggedInUsername;
-	o << '\n';
-	system("cls");
-	cout << '\n';
-	cout << "===============================" << '\n';
-	cout << "=         GAEC PROGRAM        =" << '\n';
-	cout << "===============================" << '\n';
-	cout << '\n';
-	cout << "Student inregistrat cu succes, apasati enter pentru a reveni la meniul anterior." << '\n';
-	o.close();
+	ifstream p("Studenti.txt");
+	string line3;
+	bool ok = false;
+	while (getline(p, line3))
+	{
+		istringstream pp(line3);
+		string nume, prenume, facultate, varsta, username;
+		pp >> nume >> prenume >> facultate >> varsta >> username;
+		if (username == loggedInUsername)
+		{
+			ok=true;
+		}
+	}
+	if (ok==false)
+	{
+		file.close();
+		Student s;
+		cout << '\n';
+		cout << "===============================" << '\n';
+		cout << "=         GAEC PROGRAM        =" << '\n';
+		cout << "===============================" << '\n';
+		cout << '\n';
+		cout << "Numele:";
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		getline(cin, s.Nume);
+		o << s.Nume << " ";
+		cout << "Prenumele:";
+		getline(cin, s.Prenume);
+		o << s.Prenume << " ";
+		cout << "Facultatea:";
+		getline(cin, s.Facultate);
+		o << s.Facultate << " ";
+		cout << "Varsta:";
+		getline(cin, s.Varsta);
+		o << s.Varsta << " ";
+		o << loggedInUsername;
+		o << '\n';
+		system("cls");
+		cout << '\n';
+		cout << "===============================" << '\n';
+		cout << "=         GAEC PROGRAM        =" << '\n';
+		cout << "===============================" << '\n';
+		cout << '\n';
+		cout << "Student inregistrat cu succes, apasati enter pentru a reveni la meniul anterior." << '\n';
+		cout << '\n';
+		o.close();
+	}
+	else
+	{
+		file.close();
+		system("cls");
+		cout << '\n';
+		cout << "===============================" << '\n';
+		cout << "=         GAEC PROGRAM        =" << '\n';
+		cout << "===============================" << '\n';
+		cout << '\n';
+		cout << "Aveti deja un student inscris in program" << '\n';
+		cout << '\n';
+		cout << "Apasati tasta enter pentru a reveni la meniul anterior." << '\n';
+		cout << '\n';
+		cin.ignore();
+		o.close();
+	}
+
+	
 }
 
 bool StudentManager::isEmpty()
@@ -370,4 +405,7 @@ void StudentManager::StergereStudent()
 	cout << "===============================" << '\n';
 	cout << '\n';
 	cout << "Studentul a fost sters din program." << '\n';
+	cout << '\n';
+	cout << "Apasati tasta enter pentru a reveni la meniul anterior." << '\n';
+	cout << '\n';
 }

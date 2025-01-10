@@ -21,6 +21,7 @@ public:
 	void updateUserStatus(const string& username, int status);
 	void seeUserDetails();
 	void seeAdministration();
+	void updateeventstatus(const string& username, int statuseveniment);
 };
 
 #endif
